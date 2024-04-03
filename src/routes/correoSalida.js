@@ -15,14 +15,16 @@ const transporter = nodemailer.createTransport({
 async function sendSalidaReserva(nombre, telefono, date, gmail, time, placa) {
   try {
     // Calcular la duración de la reserva en horas
-    const fechaReserva = new Date(date);
+    const fechaReserva = new Date(telefono);
     const horaSalida = new Date(); // Esta es la hora actual
-    const tiempoReservaMs = horaSalida - fechaReserva;
-    const duracionReservaHoras = tiempoReservaMs / (1000 * 60 * 60);
+    
+    const tiempoReservaMs = horaSalida.getTime() - fechaReserva.getTime();
+    const duracionReservaHoras = tiempoReservaMs / (1000 * 60 * 60); // Duración en horas
 
     // Calcular el total a pagar (asumiendo una tarifa por hora fija)
     const tarifaPorHora = 3000; // Ejemplo de tarifa por hora
     const totalAPagar = duracionReservaHoras * tarifaPorHora;
+
 
     // Definir los métodos de pago con sus respectivos enlaces o códigos QR
     const metodosDePago = {
@@ -63,9 +65,9 @@ async function sendSalidaReserva(nombre, telefono, date, gmail, time, placa) {
                 <br>
                 - Hora de salida: ${horaSalida.toLocaleString()}
                 <br>
-                - Duración de la reserva: ${duracionReservaHoras} horas
+                - Duración de la reserva: ${parseInt(duracionReservaHoras)} horas
                 <br>
-                - Total a pagar: $${totalAPagar}
+                - Total a pagar: $${parseInt(totalAPagar)}
                 <br><br>
                 Puedes realizar el pago utilizando uno de los siguientes métodos:
                 <br><br>
@@ -99,10 +101,10 @@ async function sendSalidaReserva(nombre, telefono, date, gmail, time, placa) {
       html: contenidoHTML
     });
 
-    // console.log(Correo de confirmación enviado a ${gmail});
+    console.log("Correo de confirmación enviado a", gmail);
   } catch (error) {
     console.error("Error al enviar el correo de confirmación:", error);
   }
 }
 
-module.exports = sendSalidaReserva;
+module.exports = sendSalidaReserva;}
