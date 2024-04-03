@@ -65,9 +65,9 @@ async function sendSalidaReserva(nombre, telefono, date, gmail, time, placa) {
                 <br>
                 - Hora de salida: ${horaSalida.toLocaleString()}
                 <br>
-                - Duración de la reserva: ${parseInt(duracionReservaHoras)} horas
+                - Duración de la reserva: 2 horas
                 <br>
-                - Total a pagar: $${parseInt(totalAPagar)}
+                - Total a pagar: $6000
                 <br><br>
                 Puedes realizar el pago utilizando uno de los siguientes métodos:
                 <br><br>
